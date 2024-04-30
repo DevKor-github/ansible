@@ -1,0 +1,2 @@
+- name: Bootstrap a host without python installed
+  ansible.builtin.raw: apt-get update && apt-get install python3 -y
