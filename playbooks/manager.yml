@@ -1,0 +1,15 @@
+---
+- name: Prepare nodes
+  hosts: managers[1:]
+  roles:
+    - { role: bootstrap-python }
+    - { role: prepare-node }
+- name: Join to Docker Swarm as manager
+  hosts: managers[1:]
+  tasks:
+    - community.docker.docker_swarm:
+        state: join
+        remote_addrs: [
+          "{{ hostvars[groups['managers'][0]].ansible_host }}:2377"
+        ]
+        join_token: "{{ joinToken.manager }}"
