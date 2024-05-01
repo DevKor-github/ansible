@@ -1,0 +1,11 @@
+---
+- name: Prepare nodes
+  hosts: managers[0]
+  roles:
+    - { role: bootstrap-python }
+    - { role: prepare-node }
+- name: Initialize Docker Swarm
+  hosts: managers[0]
+  tasks:
+    - community.docker.docker_swarm:
+        state: present
