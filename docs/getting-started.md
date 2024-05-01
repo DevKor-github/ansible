@@ -98,3 +98,13 @@ ansible-playbook -i inventory/sample/hosts.yml worker.yml -b -v \
     --private-key=<path-to-ssh-key>
 ```
 
+## Node 제거하기
+
+대상 Node를 Inventory에 남겨둔 상태로 아래 커맨드를 수행합니다.
+
+```sh
+ansible-playbook -i inventory/sample/hosts.yml remove-node.yml -b -v \
+    -e node=<target-node>
+```
+
+완료된 후에 대상 Node를 Inventory에서 제거합니다.

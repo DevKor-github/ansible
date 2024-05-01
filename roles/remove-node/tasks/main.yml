@@ -1,0 +1,24 @@
+---
+- name: Drain node
+  delegate_to: "{{ groups['managers'] | first }}"
+  run_once: true
+  community.docker.docker_node:
+    hostname: "{{ node }}"
+    availability: drain
+- name: Demote leader
+  delegate_to: "{{ groups['managers'] | first }}"
+  run_once: true
+  when:
+    - inventory_hostname in groups['managers']
+  community.docker.docker_node:
+    hostname: "{{ node }}"
+    role: worker
+- name: Remove node
+  community.docker.docker_swarm:
+    state: absent
+- name: Remove node from cluster
+  delegate_to: "{{ groups['managers'] | first }}"
+  run_once: true
+  community.docker.docker_swarm:
+    state: remove
+    node_id: "{{ node }}"

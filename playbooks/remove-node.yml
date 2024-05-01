@@ -1,0 +1,21 @@
+---
+- name: Confirm node removal
+  hosts: all
+  tasks:
+    - name: Confirm execution
+      pause:
+        prompt: "Are you sure you want to delete nodes state? Type 'yes' to delete nodes."
+      register: pause_result
+      run_once: True
+      when:
+        - not (skip_confirmation | default(false) | bool)
+
+    - name: Fail if user does not confirm deletion
+      fail:
+        msg: "Delete nodes confirmation failed"
+      when: pause_result.user_input | default('yes') != 'yes'
+
+- name: Reset node
+  hosts: "{{ node }}"
+  roles:
+    - { role: remove-node }
