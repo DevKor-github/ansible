@@ -21,6 +21,6 @@ python3 -m pip install -r requirements.txt
 ## Docker Swarm Cluster 생성하기
 
 ```sh
-ansible-playbook -i inventory/test/hosts.yml cluster.yml -b -v \
+ansible-playbook -i inventory/sample/hosts.yml cluster.yml -b -v \
     --private-key=<path-to-ssh-key>
 ```
