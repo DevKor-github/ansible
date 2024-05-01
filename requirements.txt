@@ -1,2 +1,2 @@
 ansible==9.3.0
-setuptools==69.5.1
+packaging==24.0

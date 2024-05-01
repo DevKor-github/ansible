@@ -1,8 +1,28 @@
 ---
-- name: Install requirements
-  ansible.builtin.pip:
+- name: Install yum-utils
+  ansible.builtin.yum:
     name:
-      docker==7.0.0
+      - yum-utils
+- name: Add docker repository
+  ansible.builtin.yum_repository:
+    name: docker-ce-stable
+    description: Docker CE Stable Repo
+    baseurl: https://download.docker.com/linux/centos/9/$basearch/stable
+    gpgkey: https://download.docker.com/linux/centos/gpg
+    gpgcheck: yes
+- name: Install docker
+  ansible.builtin.yum:
+    name:
+      - docker-ce
+      - docker-ce-cli
+      - containerd.io
+      - docker-buildx-plugin
+      - docker-compose-plugin
+- name: Restart docker
+  ansible.builtin.systemd_service:
+    state: restarted
+    daemon_reload: true
+    name: docker
 - name: Init a new swarm with default parameters
   community.docker.docker_swarm:
     state: present
