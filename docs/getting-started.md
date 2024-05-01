@@ -26,7 +26,7 @@ ansible-playbook -i inventory/sample/hosts.yml cluster.yml -b -v \
     --private-key=<path-to-ssh-key>
 ```
 
-## Token 가져오기
+### Token 가져오기
 
 SSH로 `managers[0]`에 접근하여 Token을 가져와야 합니다.
 `manager`와 `worker` Token이 있으며 각각 아래 명령어를 사용하여 찾을 수 있습니다.
