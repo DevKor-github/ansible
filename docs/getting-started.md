@@ -51,8 +51,8 @@ docker swarm join-token worker
 
     ```yaml
     joinToken:
-    manager: <redacted>
-    worker: <redacted>
+        manager: <redacted>
+        worker: <redacted>
     ```
 
 4. 아래 명령어를 사용해 암호화합니다.
