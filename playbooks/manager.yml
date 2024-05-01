@@ -1,6 +1,6 @@
 ---
 - name: Prepare nodes
-  hosts: all
+  hosts: managers
   roles:
     - { role: bootstrap-python }
     - { role: prepare-node }

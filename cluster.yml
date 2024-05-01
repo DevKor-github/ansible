@@ -1,3 +1,0 @@
----
-- name: Install Docker Swarm Cluster
-  ansible.builtin.import_playbook: playbooks/cluster.yml

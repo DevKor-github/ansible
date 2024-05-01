@@ -1,0 +1,3 @@
+---
+- name: Initialize Docker Swarm Manager
+  ansible.builtin.import_playbook: playbooks/manager.yml

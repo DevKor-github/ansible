@@ -1,5 +1,8 @@
 ---
 - import_tasks: docker.yml
-- name: Init a new swarm with default parameters
-  community.docker.docker_swarm:
-    state: present
+- ansible.builtin.yum:
+    name:
+      - python3-pip
+- ansible.builtin.pip:
+    name:
+      - docker
