@@ -66,3 +66,24 @@ docker swarm join-token worker
     ```sh
     cat secrets.yml
     ```
+
+## Manager 추가하기
+
+Inventory의 `managers:` 에 node를 추가합니다.
+
+```sh
+ansible-playbook -i inventory/sample/hosts.yml manager.yml -b -v \
+    -e @secrets.yml --vault-password-file password_file \
+    --private-key=<path-to-ssh-key>
+```
+
+## Worker 추가하기
+
+Inventory의 `workers:` 에 node를 추가합니다.
+
+```sh
+ansible-playbook -i inventory/sample/hosts.yml worker.yml -b -v \
+    -e @secrets.yml --vault-password-file password_file \
+    --private-key=<path-to-ssh-key>
+```
+
