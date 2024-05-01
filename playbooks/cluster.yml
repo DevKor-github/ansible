@@ -3,3 +3,4 @@
   hosts: all
   roles:
     - { role: bootstrap-python }
+    - { role: prepare-node }
