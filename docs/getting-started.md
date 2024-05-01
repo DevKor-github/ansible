@@ -21,6 +21,9 @@ ansible-galaxy collection install community.docker
 
 ## Docker Swarm Cluster 생성하기
 
+> [!WARNING]
+> 이 과정에서 Docker가 재시작됩니다.
+
 ```sh
 ansible-playbook -i inventory/sample/hosts.yml cluster.yml -b -v \
     --private-key=<path-to-ssh-key>
@@ -71,6 +74,10 @@ docker swarm join-token worker
 
 Inventory의 `managers:` 에 node를 추가합니다.
 
+> [!WARNING]
+> 이 과정에서 Docker가 재시작됩니다.
+> 따라서 `--limit`으로 대상 노드를 추가되는 노드로 제한하는 것이 좋습니다.
+
 ```sh
 ansible-playbook -i inventory/sample/hosts.yml manager.yml -b -v \
     -e @secrets.yml --vault-password-file password_file \
@@ -80,6 +87,10 @@ ansible-playbook -i inventory/sample/hosts.yml manager.yml -b -v \
 ## Worker 추가하기
 
 Inventory의 `workers:` 에 node를 추가합니다.
+
+> [!WARNING]
+> 이 과정에서 Docker가 재시작됩니다.
+> 따라서 `--limit`으로 대상 노드를 추가되는 노드로 제한하는 것이 좋습니다.
 
 ```sh
 ansible-playbook -i inventory/sample/hosts.yml worker.yml -b -v \
