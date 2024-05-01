@@ -25,3 +25,44 @@ ansible-galaxy collection install community.docker
 ansible-playbook -i inventory/sample/hosts.yml cluster.yml -b -v \
     --private-key=<path-to-ssh-key>
 ```
+
+## Token 가져오기
+
+SSH로 `managers[0]`에 접근하여 Token을 가져와야 합니다.
+`manager`와 `worker` Token이 있으며 각각 아래 명령어를 사용하여 찾을 수 있습니다.
+
+```sh
+docker swarm join-token manager
+docker swarm join-token worker
+```
+
+### Secret에 저장하기
+
+1. 아래 명령어를 사용해 비밀번호를 생성합니다.
+    꼭 이 방식으로 비밀번호를 생성할 필요는 없습니다.
+
+    ```sh
+    openssl rand -hex 8
+    ```
+
+2. 비밀번호를 `password_file`에 적습니다.
+
+3. `secrets.yml`을 작성합니다.
+
+    ```yaml
+    joinToken:
+    manager: <redacted>
+    worker: <redacted>
+    ```
+
+4. 아래 명령어를 사용해 암호화합니다.
+
+    ```sh
+    ansible-vault encrypt secrets.yml --vault-password-file password_file
+    ```
+
+5. 암호화가 잘 되었는지 확인합니다.
+
+    ```sh
+    cat secrets.yml
+    ```
