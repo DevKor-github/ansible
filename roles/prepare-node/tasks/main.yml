@@ -1,4 +1,8 @@
 ---
+- name: Install requirements
+  ansible.builtin.pip:
+    name:
+      docker==7.0.0
 - name: Init a new swarm with default parameters
   community.docker.docker_swarm:
     state: present
