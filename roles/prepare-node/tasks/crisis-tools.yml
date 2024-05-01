@@ -1,0 +1,15 @@
+---
+- name: Install crisis tools
+  ansible.builtin.yum:
+    name:
+      - procps-ng
+      - util-linux
+      - sysstat
+      - iproute
+      - tcpdump
+      - perf
+      - bcc-tools
+      - bpftrace
+      - trace-cmd
+      - ethtool
+      - net-tools
